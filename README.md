@@ -49,3 +49,5 @@ The options available are as follows :
 - `Set Lightgun Collection File` - Define the Collection file that Autostart will refer to in order to identify a lightgun game.
 - `Save Changes` - This must be applied after making your selections for them to take effect.
 - `Reset Unsaved Changes` - Restore these settings to those currently saved.
+
+Finally, this Autostart also takes into account the unique config required by the Supermodel emulator.  If the lightgun game being launched is a Supermodel game then it will use the Supermodel-specific lightgun config files which apply a ratio correction to the lightgun tracking.
