@@ -12,7 +12,7 @@ Or you can connect to your Pi via SSH using a reliable utility such as PuTTY.
 From the command line, type the following:
 ```
 cd /home/pi/
-wget https://github.com/Widge-5/Sinden_Lightgun_Config_Editor/raw/main/autostart_install.sh
+wget https://github.com/Widge-5/Sinden_Lightgun_Autostart/raw/main/autostart_install.sh
 chmod +x autostart_install.sh
 sudo ./autostart_install.sh
 ```
