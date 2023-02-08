@@ -1,12 +1,13 @@
 # Sinden_Lightgun_Autostart (v1.02)
 A utility to automatically start and stop Sinden Lightgun used in RetroPie, with options.
 
+This utility is very clean. Everything is self-contained within one script and references to this script placed only where necessary, making use of command line switches to activate different functions.  I've tried to make the code as economical as possible, so it doesn't take up thousands of lines of repetition where only around 400 is necessary, whilst still making it feature-rich.
 
+## WARNING ##
+**If you already have some other autostart utility in place, and you want to use this one, make sure you purge the other one first. There's no telling what those two guys will get up to if left alone in the same space!**
 
 ## How to install
 **If you already have an older version of the install script, you should delete it first. It will not be overwritten by the wget command below**
-
-**If you already have some other autostart utility in place, and you want to remove this one, make sure you purge the other one first. There's no telling what those two guys will get up to if left alone in the same space!**
 
 If running from the Pi itself with a connected keyboard, press `F4` to exit EmulationStation and reach the command line.
 
