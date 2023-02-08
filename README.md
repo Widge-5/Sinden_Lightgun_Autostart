@@ -2,8 +2,11 @@
 A utility to automatically start and stop Sinden Lightgun used in RetroPie, with options.
 
 
+
 ## How to install
 **If you already have an older version of the install script, you should delete it first. It will not be overwritten by the wget command below**
+
+**If you already have some other autostart utility in place, and you want to remove this one, make sure you purge the other one first. There's no telling what those two guys will get up to if left alone in the same space!**
 
 If running from the Pi itself with a connected keyboard, press `F4` to exit EmulationStation and reach the command line.
 
@@ -51,3 +54,7 @@ The options available are as follows :
 - `Reset Unsaved Changes` - Restore these settings to those currently saved.
 
 Finally, this Autostart also takes into account the unique config required by the Supermodel emulator.  If the lightgun game being launched is a Supermodel game then it will use the Supermodel-specific lightgun config files which apply a ratio correction to the lightgun tracking.
+
+
+## Uninstalling
+If you want to uninstall, from terminal just type `sudo /home/pi/Lightgun/utils/sindenautostart.sh -u`  You will be asked for confirmation then the script will remove the commands it placed in EmulationStation files and then delete itself.  The `widgeutils.cfg` file won't be deleted because it is a shared cfg with other utilities of mine so might still be needed, but it's harmless if not.
