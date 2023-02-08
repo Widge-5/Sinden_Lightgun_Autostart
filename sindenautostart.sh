@@ -353,6 +353,9 @@ function uninstall() {
   echo "...Removed references to sindenautostart from EmulationStation files..."
   /bin/rm -f "/home/pi/Lightgun/utils/sindenautostart.sh"
   echo "...Deleted sindenautostart.sh..."
+  bin/rm -f "/home/pi/RetroPie/roms/sinden/Sinden Lightgun Autostart Options.sh"
+  bin/rm -f "/home/pi/RetroPie/roms/ports/Sinden Lightgun Autostart Options.sh"
+  echo "...Deleted Options Menu from EmulationStation..."
   echo "Uninstall complete."
 }
 
