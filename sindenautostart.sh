@@ -16,7 +16,7 @@
 ############  GLOBAL ######
 ###########################
 
-backtitle="Autostart Options for Sinden Lightgun v1.01 -- By Widge"
+backtitle="Autostart Options for Sinden Lightgun v1.02 -- By Widge"
 utilscfg="/home/pi/Lightgun/utils/widgeutils.cfg"
 collectiondir="/opt/retropie/configs/all/emulationstation/collections"
 
