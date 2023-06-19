@@ -9,13 +9,14 @@
 
 thisfile=$(echo "$PWD/"`basename "$0"`)
 
-repo="https://github.com/Widge-5/Sinden_Lightgun_Autostart/archive/refs/heads/main.zip"
+branch="ver2"
+repo="https://github.com/Widge-5/Sinden_Lightgun_Autostart/archive/refs/heads/"$branch".zip"
 tmpfolder="/home/pi/slgce_install"
 destfolder="/home/pi/Lightgun/utils"
 sindenfolder="/home/pi/RetroPie/roms"
 utilscfg="widgeutils.cfg"
 title="Sinden Lightgun Autostart"
-
+automode=false
 
 
 function rootcheck() {
@@ -64,7 +65,7 @@ function downloader() {
   wget --timeout 15 --no-http-keep-alive --no-cache --no-cookies $3
   wait
   echo "Extracting "$1"..."
-  unzip -q main.zip
+  unzip -q $branch".zip"
 }
 
 
@@ -86,7 +87,11 @@ echo $thisfile
     colourecho cLGREEN "[1] SINDEN"
     colourecho cLGREEN "[2] PORTS"
     colourecho cLGREEN "[Q] quit"
-    read -N1 ans
+    if [ $automode = true ]; then
+		ans=1
+	else
+		read -N1 ans
+	fi
     case "$ans" in
       1)   colourecho cLBLUE " : SINDEN"
            sindenfolder="$sindenfolder/sinden"
@@ -99,13 +104,13 @@ echo $thisfile
     esac
   done
   downloader "Autostart for Sinden Lightgun" "$tmpfolder" "$repo"
-  cd "$tmpfolder/Sinden_Lightgun_Autostart-main"
+  cd "$tmpfolder/Sinden_Lightgun_Autostart-"$branch
   chmod +x *.sh
   if [ ! -d "$destfolder" ]; then
     mkdir "$destfolder"
   fi
-  cp -pf "$tmpfolder/Sinden_Lightgun_Autostart-main/sindenautostart.sh" $destfolder
-  cp -pf "$tmpfolder/Sinden_Lightgun_Autostart-main/Sinden Lightgun Autostart Options.sh" $sindenfolder
+  cp -pf "$tmpfolder/Sinden_Lightgun_Autostart-"$branch"/sindenautostart.sh" $destfolder
+  cp -pf "$tmpfolder/Sinden_Lightgun_Autostart-"$branch"/Sinden Lightgun Autostart Options.sh" $sindenfolder
   tidyup "$tmpfolder"
   chown -R pi:pi "$destfolder"
   colourecho cLCYAN  "Install completed"
@@ -113,7 +118,11 @@ echo $thisfile
     colourecho cLCYAN  "Do you want to delete this installer?"
     colourecho cLGREEN "[Y] Yes"
     colourecho cLGREEN "[N] No"
-    read -N1 ans
+	if [ $automode = true ]; then
+		ans="Y"
+	else
+		read -N1 ans
+	fi
     case "$ans" in
       y|Y)  colourecho cLBLUE " : YES"
             /bin/rm -f "$thisfile"
@@ -130,7 +139,13 @@ echo $thisfile
 ####### START #######
 
 rootcheck
+
+if [ "$1" = "--auto" -o "$1" = "-a" ]; then
+	automode=true
+	echo "Automatic installation requested..."
+else
+	automode=false
+fi
+
 main
-
-
 
