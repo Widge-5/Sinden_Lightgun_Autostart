@@ -1,6 +1,9 @@
 # Sinden_Lightgun_Autostart (v1.02)
 A utility to automatically start and stop Sinden Lightgun used in RetroPie, with options.
 
+**Intended for use only with Barebones 9.0-9.1 and the v1.08 Sinden driver software**
+**If you are using Barebones 9.2 then you should use the ver2 branch**
+
 This utility is very clean. Everything is self-contained within one script and references to this script placed only where necessary, making use of command line switches to activate different functions.  I've tried to make the code as economical as possible, so it doesn't take up thousands of lines of repetition where only around 400 is necessary, whilst still making it feature-rich.
 
 ## WARNING ##
@@ -16,7 +19,7 @@ Or you can connect to your Pi via SSH using a reliable utility such as PuTTY.
 From the command line, type the following:
 ```
 cd /home/pi/
-wget https://github.com/Widge-5/Sinden_Lightgun_Autostart/raw/main/autostart_install.sh
+wget https://github.com/Widge-5/Sinden_Lightgun_Autostart/raw/ver1/autostart_install.sh
 chmod +x autostart_install.sh
 sudo ./autostart_install.sh
 ```
