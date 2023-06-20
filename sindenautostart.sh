@@ -226,7 +226,6 @@ function uninstall() {
 #########################
 
 function enable_os_reload_buttons() {		## ## -- Required for Supermodel o/s reloading. Can be deleted if o/s reload toggle is implemented in Sinden driver release (see Autostart section below)
-	echo " ENABLING BUTTONS"
 	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono.exe.config"
 	sed -i -e "/.*\"OffscreenReloadP2\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono.exe.config"
 	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono2.exe.config"
