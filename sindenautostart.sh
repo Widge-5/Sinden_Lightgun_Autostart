@@ -171,6 +171,7 @@ function mainmenu(){
 function stopguns(){
     sudo pkill -9 -f "mono"
     sudo rm /tmp/LightgunMono* -f
+	disable_os_reload_buttons		## ## -- Required for Supermodel o/s reloading. Can be deleted if o/s reload toggle is implemented in Sinden driver release (see Autostart section below)
 }
 
 
@@ -181,7 +182,7 @@ function stopguns(){
 
 
 function recoilreset(){
-## this function is deprecated so, if called, this will now delete the reference that calls it, left behind by a previous version.
+## ## -- this function is deprecated so, if called, this will now delete the reference that calls it, left behind by a previous version.
     linedelete "sindenautostart.sh" "/opt/retropie/configs/all/autostart.sh"
 }
 
@@ -208,7 +209,7 @@ function uninstall() {
   
   applychange "$utilscfg" "AutostartEnable"        "0"
   echo "...Autostart disabled in widgeutils.cfg..."
-  linedelete "sindenautostart.sh" "/opt/retropie/configs/all/autostart.sh"  #keep this line in case the reference is still present from a previous version
+  linedelete "sindenautostart.sh" "/opt/retropie/configs/all/autostart.sh"		## ## -- keep this line in case the reference is still present from a previous version
   linedelete "sindenautostart.sh" "/opt/retropie/configs/all/runcommand-onlaunch.sh"
   linedelete "sindenautostart.sh" "/opt/retropie/configs/all/runcommand-onend.sh"
   echo "...Removed references to sindenautostart from EmulationStation files..."
@@ -224,20 +225,35 @@ function uninstall() {
 #  Autostart
 #########################
 
+function enable_os_reload_buttons() {		## ## -- Required for Supermodel o/s reloading. Can be deleted if o/s reload toggle is implemented in Sinden driver release (see Autostart section below)
+	echo " ENABLING BUTTONS"
+	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono.exe.config"
+	sed -i -e "/.*\"OffscreenReloadP2\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono.exe.config"
+	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono2.exe.config"
+	sed -i -e "/.*\"OffscreenReloadP2\"/s/value=\".*\"/value=\"1\"/" $monodir"/LightgunMono2.exe.config"
+}
+
+function disable_os_reload_buttons() {		## ## -- Required for Supermodel o/s reloading. Can be deleted if o/s reload toggle is implemented in Sinden driver release (see Autostart section below)
+	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"0\"/" $monodir"/LightgunMono.exe.config"
+	sed -i -e "/.*\"OffscreenReloadP2\"/s/value=\".*\"/value=\"0\"/" $monodir"/LightgunMono.exe.config"
+	sed -i -e "/.*\"OffscreenReload\"/s/value=\".*\"/value=\"0\"/" $monodir"/LightgunMono2.exe.config"
+	sed -i -e "/.*\"OffscreenReloadP2\"/s/value=\".*\"/value=\"0\"/" $monodir"/LightgunMono2.exe.config"
+}
 
 function autostart(){  
   local rc_emu="$2"
   local rc_rom="$3"
   local rc_collection="$collectiondir/$cfg_collectionfile"
 
-if fgrep "$rc_rom" "$rc_collection" || [ $cfg_allgames = "1" ]; then
-    if [ "$rc_emu" = "Supermodel" ]; then       
-      ## do something for SM3  ## LOST WORLD needs o/s reloading
-	  echo " "
-    fi
+if fgrep "$rc_rom" "$rc_collection" || [ $cfg_allgames = "1" ]; then	## ## -- This section checks for Supermodel3 and enables o/s reloading if true.
+    if [ "$rc_emu" = "supermodel3" ]; then       						## ## -- because Lost World can't handle o/s reloading by itself, so requires
+      	echo "Supermodel3 detected. Enabling offscreen reloading..."	## ## -- the sinden options to be enabled.
+		enable_os_reload_buttons										## ## -- Driver feature to toggle the o/s reloading option on-the-fly has been
+    fi																	## ## -- requested. If implemented this section can be removed. (along with the 2x functions above)
+
   cd "$monodir"
   sudo mono-service LightgunMono.exe
-#  sudo mono-service LightgunMono2.exe
+#  sudo mono-service LightgunMono2.exe			## ## -- Temporarily disabled as a bug in the Sinden driver beta prevents 3rd and 4th guns working
 fi
 }
 
