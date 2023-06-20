@@ -9,7 +9,7 @@ This utility is very clean. Everything is self-contained within one script and r
 # What's new?
 Many of the features of the earlier version of the utility are no longer required, thanks to feature improvements in the new Sinden Driver software.  It's no longer necessary to have multiple configs for different recoil states as the new Sinden software now allows you to toggle recoil in-game. So the only need that remains is the option to enable/disable autostart. 
 
-The previous version took into account the unique config required by the Supermodel emulator. However, the latest version of Supermodel 3 used in Barebones 9.2 uses an improved raw mouse input system that doesn't requre a ratio adjustment so this is no longer required.
+The previous version took into account the unique config required by the Supermodel emulator. However, the latest version of Supermodel 3 used in Barebones 9.2 uses an improved raw mouse input system that doesn't requre a ratio adjustment so this is no longer required.  However, Supermodel3 games (specifically Lost World) are unable to recognise when the gun is pointing offscreen so requires the offscreen reloading option enabled in the Sinden software so this utility will enable it if it detects that the Supermodel3 emulator is launched, then disable it again afterwards.  If a o/s reloading toggle is implemented in the release version then this will no longer be necessary.
 
 
 ## WARNING ##
